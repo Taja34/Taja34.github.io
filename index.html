@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Santiago Gutierrez Restrepo</title>
+<meta name="description" content="Portafolio de Santiago Gutierrez Restrepo, desarrollador full-stack en Colombia: React, Next.js, TypeScript, Supabase y Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura; cada caso de estudio es una ficha técnica con métricas a la izquierda y relato a la derecha. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #111a2e;
+  --muted: #586179;
+  --line: #e1e4ec;
+  --accent: #2446c9;
+  --accent-soft: #e8ecfb;
+  --display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1322; --surface: #151d31; --ink: #e9edf6; --muted: #9ba4b9;
+    --line: #26304a; --accent: #8ea6ff; --accent-soft: #1c2747; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1322; --surface: #151d31; --ink: #e9edf6; --muted: #9ba4b9;
+  --line: #26304a; --accent: #8ea6ff; --accent-soft: #1c2747; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.65 var(--body); }
+.wrap {
+  max-width: 960px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.label { font: 500 .75rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* Navegación */
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 18px; flex-wrap: wrap; }
+nav .name { font-family: var(--display); font-weight: 700; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 18px; flex-wrap: wrap; }
+nav a { color: var(--ink); text-decoration: none; font-size: .95rem; }
+nav a:hover { color: var(--accent); }
+
+/* Presentación */
+.intro .wrap { padding-block: 48px 40px; display: grid; gap: 18px; }
+.intro p.lead { font-size: 1.15rem; color: var(--muted); max-width: 40em; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--surface); }
+.btn.ghost { color: var(--accent); }
+.stack-line { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 400 .8rem/1 var(--mono); padding: 6px 9px; border-radius: 6px; background: var(--accent-soft); color: var(--ink); white-space: nowrap; }
+
+section > .wrap { padding-block: 36px; display: grid; gap: 20px; }
+.section-head { display: grid; gap: 6px; }
+
+/* Casos de estudio */
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; display: grid; grid-template-columns: 240px 1fr; overflow: hidden; }
+.case-side { padding: 22px; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 16px; min-width: 0; }
+.case-main { padding: 22px 24px; display: grid; gap: 14px; min-width: 0; }
+.case-main p { max-width: 62ch; }
+.metric { display: grid; gap: 2px; }
+.metric b { font: 600 1.35rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
+.metric span { color: var(--muted); font-size: .85rem; }
+.case ul.points { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.case .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.note { color: var(--muted); font-size: .9rem; }
+@media (max-width: 720px) {
+  .case { grid-template-columns: 1fr; }
+  .case-side { border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+}
+
+/* Otros proyectos */
+.mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.mini { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.mini h3 { font-size: 1.05rem; }
+.mini p { color: var(--muted); font-size: .95rem; }
+
+/* Cómo trabajo */
+.steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; counter-reset: s; }
+.steps li { border-top: 2px solid var(--accent); padding-top: 12px; display: grid; gap: 4px; }
+.steps li::before { counter-increment: s; content: "Paso " counter(s); font: 500 .75rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.steps p { color: var(--muted); font-size: .95rem; }
+
+/* Contacto */
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 12px; }
+.contact dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; }
+.contact dt { font: 500 .8rem/1.6 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.contact dd { margin: 0; overflow-wrap: anywhere; }
+footer .wrap { padding-block: 24px 48px; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="name">Santiago Gutierrez Restrepo</span>
+    <ul>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#como-trabajo">Cómo trabajo</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="en/" lang="en" hreflang="en">English</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="intro">
+  <div class="wrap">
+    <span class="label">Desarrollador full-stack · Colombia</span>
+    <h1>Construyo aplicaciones web completas, de la base de datos a la pantalla.</h1>
+    <p class="lead">Trabajo con React, Next.js y TypeScript en el frontend, Supabase y PostgreSQL en el backend, y Python para automatización y análisis de datos. Me formé en el bootcamp intensivo de desarrollo front-end de Makaia. Me gusta entender el problema del negocio antes de escribir código, y dejar cada proyecto documentado y probado.</p>
+    <div class="actions">
+      <a class="btn primary" href="#proyectos">Ver proyectos</a>
+      <a class="btn ghost" href="https://github.com/Taja34" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="stack-line" aria-label="Tecnologías">
+      <span class="chip">TypeScript</span><span class="chip">React 19</span><span class="chip">Next.js</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Tailwind CSS</span><span class="chip">Redux Toolkit</span><span class="chip">Firebase</span><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">Vitest</span><span class="chip">Playwright</span>
+    </div>
+  </div>
+</header>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Proyectos destacados</span>
+      <h2>Tres problemas reales, tres soluciones</h2>
+    </div>
+
+    <!-- Caso 1 -->
+    <article class="case">
+      <div class="case-side">
+        <div class="metric"><b>Multi-campaña</b><span>cada campaña aislada en la base de datos</span></div>
+        <div class="metric"><b>14</b><span>migraciones SQL con seguridad por filas</span></div>
+        <div class="metric"><b>9</b><span>documentos de diseño antes del código</span></div>
+        <div class="metric"><b>3 niveles</b><span>de pruebas: unitarias, RLS y extremo a extremo</span></div>
+      </div>
+      <div class="case-main">
+        <span class="label">2026 · SaaS · en desarrollo</span>
+        <h3>Plataforma de gestión de campañas políticas</h3>
+        <p>Las campañas a alcaldía en municipios medianos de Colombia se manejan con Excel, grupos de WhatsApp y cuadernos: listas duplicadas, territorio sin control y datos personales recogidos sin autorización. Diseñé una plataforma para saber cuántos apoyos reales hay, dónde están y quién los trae, cumpliendo la ley de protección de datos.</p>
+        <ul class="points">
+          <li>Arquitectura multi-inquilino: el aislamiento entre campañas se garantiza con Row Level Security en PostgreSQL, no solo en la interfaz.</li>
+          <li>Permisos por rol y alcance (territorio, frente o registros propios), con auditoría de cada cambio.</li>
+          <li>Documento de identidad cifrado, política de datos versionada y solicitudes de habeas data con plazos.</li>
+          <li>Registro rápido desde el celular con alerta de duplicados, búsqueda con filtros y vistas guardadas.</li>
+          <li>Catálogo territorial con la codificación DIVIPOLA del DANE.</li>
+        </ul>
+        <div class="meta"><span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">TypeScript</span><span class="chip">Supabase</span><span class="chip">Zod</span><span class="chip">Tailwind 4</span><span class="chip">Vitest</span><span class="chip">Playwright</span></div>
+        <p class="note">Código privado. Puedo mostrarlo en una entrevista.</p>
+      </div>
+    </article>
+
+    <!-- Caso 2 -->
+    <article class="case">
+      <div class="case-side">
+        <div class="metric"><b>8 años</b><span>de datos en el backtest (2018–2026)</span></div>
+        <div class="metric"><b>488</b><span>operaciones simuladas</span></div>
+        <div class="metric"><b>1,54</b><span>factor de beneficio (1,44 fuera de muestra)</span></div>
+        <div class="metric"><b>24/7</b><span>en producción con stops en el exchange</span></div>
+      </div>
+      <div class="case-main">
+        <span class="label">2026 · Python · en producción</span>
+        <h3>Bot de trading algorítmico</h3>
+        <p>Un sistema que opera criptomonedas en Binance con reglas fijas y gestión de riesgo estricta, para quitar la emoción de las decisiones. Validé la estrategia con datos antes de arriesgar dinero y la llevé por fases: backtest, red de pruebas y operación real.</p>
+        <ul class="points">
+          <li>Motor de backtest propio con comisiones, validación fuera de muestra y simulación Monte Carlo del riesgo de caída.</li>
+          <li>Comparé filtros de mercado, más monedas y niveles de riesgo; solo pasó a producción lo que mejoró los resultados.</li>
+          <li>Dos estrategias en vivo en cuentas separadas, con interruptor automático si la caída supera el límite.</li>
+          <li>Avisos por Telegram, registro de operaciones y arranque automático en Windows.</li>
+        </ul>
+        <div class="meta"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">ccxt</span><span class="chip">pytest</span><span class="chip">API de Binance</span><span class="chip">Telegram</span></div>
+        <p class="note">Las cifras son del backtest, no una promesa de rentabilidad. Código privado.</p>
+      </div>
+    </article>
+
+    <!-- Caso 3 -->
+    <article class="case">
+      <div class="case-side">
+        <div class="metric"><b>SPA</b><span>con rutas, estado global y autenticación</span></div>
+        <div class="metric"><b>4</b><span>módulos de Redux: usuario, productos, platos y conteo</span></div>
+      </div>
+      <div class="case-main">
+        <span class="label">2022 · React · Bootcamp Makaia</span>
+        <h3>Ifood: app de pedidos de comida</h3>
+        <p>Una aplicación de domicilios inspirada en Ifood: registro e inicio de sesión, búsqueda de restaurantes, detalle de platos y un flujo de pedido por pasos con historial.</p>
+        <ul class="points">
+          <li>Autenticación y datos en Firebase (Auth y Firestore).</li>
+          <li>Estado global con Redux Toolkit y formularios validados con React Hook Form.</li>
+          <li>Estilos modulares con Sass por componente.</li>
+        </ul>
+        <div class="meta"><span class="chip">React</span><span class="chip">Redux Toolkit</span><span class="chip">Firebase</span><span class="chip">React Hook Form</span><span class="chip">Sass</span></div>
+        <p><a href="https://github.com/Taja34/Ifood" target="_blank" rel="noopener">Ver código en GitHub</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="otros">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Más proyectos</span>
+      <h2>Otros trabajos</h2>
+    </div>
+    <div class="mini-grid">
+      <div class="mini">
+        <h3>Salud Mental</h3>
+        <p>App con registro, inicio de sesión y rutas públicas y privadas. Redux Toolkit, Firebase y validación con esquemas.</p>
+        <a href="https://github.com/Taja34/saludMental" target="_blank" rel="noopener">Código</a>
+      </div>
+      <div class="mini">
+        <h3>Agencia de vuelos</h3>
+        <p>Buscador y reserva de vuelos con consumo de API usando axios, formularios con hooks propios y React Router.</p>
+        <a href="https://github.com/Taja34/agencia-vuelos" target="_blank" rel="noopener">Código</a>
+      </div>
+      <div class="mini">
+        <h3>Pizzería</h3>
+        <p>Tienda en React y Bootstrap con su propio backend de prueba en json-server para el menú y los pedidos.</p>
+        <a href="https://github.com/Taja34/pizzeria" target="_blank" rel="noopener">Código</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-trabajo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Cómo trabajo</span>
+      <h2>Del problema al producto desplegado</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Entender</h3><p>Hablo con quien usa el sistema y escribo el alcance, los roles y las decisiones antes de programar.</p></li>
+      <li><h3>Diseñar</h3><p>Base de datos, permisos y pantallas en documentos cortos que el cliente puede revisar.</p></li>
+      <li><h3>Construir por etapas</h3><p>Cada etapa termina en algo usable, con pruebas automáticas y desarrollo asistido por IA revisado línea a línea.</p></li>
+      <li><h3>Medir</h3><p>Datos reales frente a lo esperado, y ajustes solo cuando los números lo justifican.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact">
+      <span class="label">Contacto</span>
+      <h2>¿Tienes un proyecto o una vacante?</h2>
+      <p>Disponible para trabajos por proyecto y empleo de medio tiempo, remoto o en Colombia.</p>
+      <dl>
+        <dt>GitHub</dt><dd><a href="https://github.com/Taja34" target="_blank" rel="noopener">github.com/Taja34</a></dd>
+        <dt>Correo</dt><dd><a href="mailto:santi.gutierrez.restrepo@gmail.com">santi.gutierrez.restrepo@gmail.com</a></dd>
+        <dt>Formación</dt><dd>Bootcamp intensivo de desarrollo front-end, Makaia</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">HTML y CSS, sin frameworks. Publicado en GitHub Pages.</div>
+</footer>
+</body>
+</html>
