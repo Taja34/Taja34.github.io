@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbería El Parche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Diseño: una sola columna, franjas de color como un poste de barbería.
+   Los colores se guardan en "variables" (tokens) para cambiarlos en un solo lugar. */
+:root {
+  --fondo: #f4f5f8;
+  --tinta: #14213a;
+  --suave: #5b6478;
+  --tarjeta: #ffffff;
+  --rojo: #c4302b;
+  --verde: #1f8f4e;
+  --linea: #dfe2ea;
+  --titulo: "Archivo Black", Impact, "Arial Black", sans-serif;
+  --texto: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+/* Modo oscuro: solo se cambian las variables */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #0f1626; --tinta: #eef1f7; --suave: #a3abbd; --tarjeta: #18223a;
+    --rojo: #ef5b54; --verde: #3fbf76; --linea: #2a3550; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fondo: #0f1626; --tinta: #eef1f7; --suave: #a3abbd; --tarjeta: #18223a;
+  --rojo: #ef5b54; --verde: #3fbf76; --linea: #2a3550; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font: 400 1rem/1.6 var(--texto);
+}
+/* Contenedor central con margen a los lados (también en celulares) */
+.caja {
+  max-width: 880px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2 { font-family: var(--titulo); font-weight: 400; line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: 1.6rem; }
+a { color: inherit; }
+a:focus-visible, .boton:focus-visible { outline: 3px solid var(--rojo); outline-offset: 3px; }
+
+/* Franja tipo poste de barbería */
+.poste {
+  height: 10px;
+  background: repeating-linear-gradient(135deg, var(--rojo) 0 14px, var(--tarjeta) 14px 28px, var(--tinta) 28px 42px, var(--tarjeta) 42px 56px);
+}
+
+/* Encabezado */
+header .caja { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px; flex-wrap: wrap; }
+.marca { font-family: var(--titulo); font-size: 1.25rem; letter-spacing: .02em; }
+
+/* Botón de WhatsApp */
+.boton {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  background: var(--verde); color: #fff; text-decoration: none;
+  font-weight: 600; padding: 10px 18px; border-radius: 999px;
+}
+.boton:hover { filter: brightness(1.08); }
+
+/* Portada */
+.portada .caja { padding-block: 40px 32px; display: grid; gap: 16px; }
+.portada h1 { font-size: clamp(2.2rem, 7vw, 3.8rem); }
+.portada h1 span { color: var(--rojo); }
+.portada p { margin: 0; max-width: 34em; color: var(--suave); font-size: 1.1rem; }
+
+section .caja { padding-block: 28px; display: grid; gap: 16px; }
+
+/* Lista de precios */
+.precios { list-style: none; margin: 0; padding: 0; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 12px; }
+.precios li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--linea); }
+.precios li:last-child { border-bottom: 0; }
+.precios small { display: block; color: var(--suave); }
+.precio { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Horario y ubicación lado a lado; en celular se apilan */
+.dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.dato { min-width: 0; }
+.dato h3 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); }
+.horario { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-variant-numeric: tabular-nums; }
+.horario dt { font-weight: 600; }
+.horario dd { margin: 0; }
+
+footer .caja { padding-block: 24px 40px; color: var(--suave); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<!-- Encabezado: nombre y botón para pedir cita -->
+<div class="poste"></div>
+<header>
+  <div class="caja">
+    <span class="marca">BARBERÍA EL PARCHE</span>
+    <!-- wa.me abre WhatsApp con el número y un mensaje ya escrito -->
+    <a class="boton" href="https://wa.me/573000000000?text=Hola%2C%20quiero%20pedir%20una%20cita" target="_blank" rel="noopener">Pedir cita por WhatsApp</a>
+  </div>
+</header>
+
+<!-- Portada: lo primero que ve el cliente -->
+<div class="portada">
+  <div class="caja">
+    <h1>Tu corte listo en <span>30 minutos</span>.</h1>
+    <p>Con cita o por orden de llegada. Cortes clásicos, degradados y arreglo de barba en el centro del barrio.</p>
+  </div>
+</div>
+
+<!-- Servicios y precios -->
+<section id="servicios">
+  <div class="caja">
+    <h2>Servicios y precios</h2>
+    <ul class="precios">
+      <li><span>Corte de cabello<small>Clásico o degradado, incluye lavado</small></span><span class="precio">$20.000</span></li>
+      <li><span>Corte + barba<small>El combo más pedido</small></span><span class="precio">$30.000</span></li>
+      <li><span>Arreglo de barba<small>Perfilado con navaja y toalla caliente</small></span><span class="precio">$12.000</span></li>
+      <li><span>Corte para niños<small>Hasta 12 años</small></span><span class="precio">$15.000</span></li>
+      <li><span>Cejas<small>Perfilado con navaja</small></span><span class="precio">$5.000</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Horario y ubicación -->
+<section id="visitanos">
+  <div class="caja">
+    <h2>Visítanos</h2>
+    <div class="dos">
+      <div class="dato">
+        <h3>Horario</h3>
+        <dl class="horario">
+          <dt>Lunes a viernes</dt><dd>9:00 a. m. – 8:00 p. m.</dd>
+          <dt>Sábado</dt><dd>8:00 a. m. – 9:00 p. m.</dd>
+          <dt>Domingo y festivos</dt><dd>9:00 a. m. – 2:00 p. m.</dd>
+        </dl>
+      </div>
+      <div class="dato">
+        <h3>Dirección</h3>
+        <p style="margin:0 0 8px">Calle 10 # 5-23, local 2</p>
+        <!-- Enlace a Google Maps: en un negocio real se pone su ubicación exacta -->
+        <a href="https://www.google.com/maps/search/?api=1&query=Calle+10+5-23" target="_blank" rel="noopener">Ver en Google Maps</a>
+        <p style="margin:8px 0 0">WhatsApp: <strong>300 000 0000</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="caja">Página de ejemplo para un portafolio. El negocio, la dirección y el número son ficticios.</div>
+</footer>
+</body>
+</html>
